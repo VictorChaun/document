@@ -206,6 +206,89 @@ tab键统一为 <strong>4个空格</strong> 代替
   ```
 
 #### 4、JAVASCRIPT
+* JS尽量使用oop思想做到组件化，每一个组件是一个单独的文件（或文件夹）
+* 所有的前端异常，需要做到单一性处理，不能一个try catch里面包含多个可能性
+* 类命名：首字母大写，驼峰命名，eg： TabPanel
+* 函数命名：首字母小写，驼峰命名，eg：getValue()
+* 变量命名：首字母小写，驼峰命名，带有常用名词全部大写
+
+  ```
+    var myHomeAddress;
+    var phtoneID;
+    var imageURL;
+  ```
+* 变量声明必须使用var，避免全局变量的使用，如window.name = '' 或者 name = ''
+* jQuery变量要求首字符为 $， 私有变量:首字符为_， 常量：全大写
+
+  ```
+    var $name = $('#nameId');
+    var _sex = '女';
+    var PI = 3.1415926;
+  ```
+* 良好的注释信息
+
+  ```
+    多行注释：每个方法定义前需要注明方法作用，参数说明
+    /**
+     * 功能描述
+     * @param <String> arg1 参数1
+     * @param <Number> arg2 参数2，默认为0
+     * @return <Boolean> 返回值类型和说明
+     */
+     function getValue (arg1, arg2) {
+
+     }
+
+     单行注释：
+    // variable declaration
+    var name = '';
+    var sex = '男';
+    ……
+  ```
+
+* 何时使用注释
+  
+  ```
+    难于理解的代码段
+    可能存在错误的代码段
+    浏览器特殊的HACK代码
+    复杂或者想吐槽的业务逻辑代码
+    业务逻辑强相关的代码
+  ```
+
+* 数组和对象声明
+  
+  ```
+    <!-- Array -->
+    // Bad
+    var colors = new Array("red", "green", "blue");
+    var numbers = new Array(1, 2, 3, 4);
+
+    // Good
+    var colors = [ "red", "green", "blue" ];
+    var numbers = [ 1, 2, 3, 4 ];
+
+    <!-- Object -->
+    // Bad
+    var team = new Team();
+    team.title = "AlloyTeam";
+    team.count = 25;
+
+    // Good
+    var team = {
+        title: "AlloyTeam",
+        count: 25
+    };
+  ```
+* JSON 格式风格：属性名和值添加双引号，值与属性间一个空格，最后一个属性后不要添加逗号
+
+  ```
+    var record = {
+      "id": "1",
+      "name": "zhangsan",
+      "sex": "男"
+    }
+  ```
 * 空行的使用
 
   ```
@@ -237,47 +320,6 @@ tab键统一为 <strong>4个空格</strong> 代替
         }
       }
   ```
-* 类命名：首字母大写，驼峰命名，eg： TabPanel
-* 函数命名：首字母小写，驼峰命名，eg：getValue()
-* 变量命名：首字母小写，驼峰命名，带有常用名词全部大写
-
-  ```
-    var myHomeAddress;
-    var phtoneID;
-    var imageURL;
-  ```
-* 变量声明必须使用var，避免全局变量的使用，如window.name = '' 或者 name = ''
-* jQuery变量要求首字符为 $， 私有变量:首字符为_， 常量：全大写
-
-  ```
-    var $name = $('#nameId');
-    var _sex = '女';
-    var PI = 3.1415926;
-  ```
-* JSON 格式风格：属性名和值添加双引号，值与属性间一个空格，最后一个属性后不要添加逗号
-
-  ```
-    var record = {
-      "id": "1",
-      "name": "zhangsan",
-      "sex": "男"
-    }
-  ```
-* JS尽量使用oop思想做到组件化，每一个组件是一个单独的文件（或文件夹）
-* 所有的前端异常，需要做到单一性处理，不能一个try catch里面包含多个可能性
-* 良好的注释信息：每个方法定义前需要注明方法作用，参数说明
-
-  ```
-    /**
-     * 功能描述
-     * @param <String> arg1 参数1
-     * @param <Number> arg2 参数2，默认为0
-     * @return <Boolean> 返回值类型和说明
-     */
-     function getValue (arg1, arg2) {
-
-     }
-  ```
 * 如果是异步编程，回调函数遵循cb(err, data)模式，第一个参数为异常信息，第二个为正常返回值
 
   ```
@@ -296,7 +338,6 @@ tab键统一为 <strong>4个空格</strong> 代替
 
     }
   ```
-* 条件判断请用 "===" ，尽量不要用 "=="
 * if、while、for、do语句的执行体总是用"{"和"}"括起来，即使在其结构体内只有一条语句
 
   ```
@@ -304,10 +345,17 @@ tab键统一为 <strong>4个空格</strong> 代替
       console.log(hello word!);
     }
   ```
+* 使用字符串 "undefined" 替代 undefined 对变量进行判断
+* 条件判断请用 "===" "!==" ，尽量不要用 "=="、"!="
+* 除非特殊情况，否则不要使用eval函数
 
 ### 工具使用(MAC)：
+  * 在线评定网站 [Google PageSpeed](http://developers.google.com/speed/pagespeed/insights/)
   * 建议用sublime（不做强制，sublime的插件机制实在太赞了）
   * HTTP抓包及Post/Get模拟：[Charles](http://www.charlesproxy.com/)
   * markdown 语法使用 [mou](http://25.io/mou/)
 
-### 参考文章
+### 推荐阅读
+  * [web缓存](https://developers.google.com/speed/docs/insights/LeverageBrowserCaching)
+  * [浏览器渲染原理简介](http://coolshell.cn/articles/9666.html)
+  * [NodeJS浅谈](http://nqdeng.github.io/7-days-nodejs/)
