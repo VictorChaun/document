@@ -8,7 +8,7 @@ tab键统一为 <strong>4个空格</strong> 代替
 ### 文件规范：
 * 文件目录: 所有前端静态资源存放到res/static目录，子目录分为lib、js、css、html、img（lib存放公共资源）
 * 文件分离: html和css、js代码不能互相入侵，做到严格分离，比如对应的css代码需要放在css文件中，然后通过外部引用到html文件
-* 文件命名: 只能出现小写引文字母，且只包含字母和数字，多个单词以连字符 ( - ) 连接，首页一般采用index命名，eg：index.js
+* 文件命名: 只能出现小写引文字母，且只包含字母和数字，多个单词以连字符 ( - ) 连接，首页一般采用index命名，eg：my-table.js
 * 文件注释: 每个文件需要写明注释信息，方便其他人员维护和再开发
   
   ```
@@ -76,13 +76,40 @@ tab键统一为 <strong>4个空格</strong> 代替
 * html中尽量避免使用style="xxx:xxx"的内嵌样式表
 * 段落分隔符要使用实际对应的\<p>元素，而不是用多个\<br>标签。
 * 特殊符号需要做转义，参考HTML [符号实体](http://www.w3school.com.cn/html/html_entities.asp)
+* HTML属性顺序（建议），保证易读性
+  
+  ```
+    id、class、name、data-*、src/for/type/href、title/alt
+    eg: <div id="myId", class="my" title="hello world">
+          ……
+        </div>
+  ```
+* 减少标签数量，避免多余的父节点。
+  
+  ```
+    <!-- Not so great -->
+    <span class="avatar">
+      <img src="...">
+    </span>
+
+    <!-- Better -->
+    <img class="avatar" src="...">
+  ```
+* 在 JavaScript 文件中生成标签让内容变得更难查找，更难编辑，性能更差，尽量避免这种情况的出现
 
 #### 3、CSS（麻烦全龙补充）
 * 统一个页面CSS尽量都写到同一个css文件中（oop组件化最终也会打包压缩到同一文件中）
 * 从外部文件加载CSS，尽可能减少文件数，加载标签必须放在文件的 HEAD 部分
 * CSS的外部引用 LINK 标签加载，尽量避免使用@import
+
+  ```
+    import会额外增加页面请求，还可能导致不可预见的问题，可以改用以下方法：
+      1、多用几个<link>标签
+      2、将css编译到一个文件
+  ```
 * 禁止使用table布局，div也要避免多层嵌套，尽量少使用id，原则上Id用于父级别大规模单一元素，class用于重复使用的子模块中
-* 颜色统一使用十六进制的颜色单位，使用color: #FF0000替代color: red，特殊场景需要用到rgba除外
+* 颜色统一使用十六进制的颜色单位，使用color: #ff0000替代color: red，特殊场景需要用到rgba除外
+* 所有十六进制值都应该使用小写字母(因为小写字母有更多样的外形，在浏览文档时，他们能够更轻松的被区分开来)，例如：<font color="FF0000">#fff</font>，尽量使用 <font color="ff0000">#fff</font> 替代<font color="ff0000">#ffffff</font>
 * 正确使用缩写，例如navigation就可以缩写为nav，而author就不要缩写
 * 书写格式，每个属性值独占一行（禁止写成单行），同时注意缩进规范，(如下例)
 
@@ -121,11 +148,105 @@ tab键统一为 <strong>4个空格</strong> 代替
     line-height: 25px;
   }
   ```
+* 不要为 0 指明单位，比如使用 margin: 0; 而不是 margin: 0px;
+
+更多CSS语法问题，请参考[Wikipedia](http://en.wikipedia.org/wiki/Cascading_Style_Sheets#Syntax)
+
+* CSS属性声明顺序：
+  
+  ```
+    基本原则： 
+      1、Positioning
+      2、Box model 盒模型
+      3、Typographic 排版
+      4、Visual 外观
+    eg：
+      .declaration-order {
+          /* Positioning */
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          z-index: 100;
+
+          /* Box-model */
+          display: block;
+          float: right;
+          width: 100px;
+          height: 100px;
+
+          /* Typography */
+          font: normal 13px "Helvetica Neue", sans-serif;
+          line-height: 1.5;
+          color: #333;
+          text-align: center;
+
+          /* Visual */
+          background-color: #f5f5f5;
+          border: 1px solid #e5e5e5;
+          border-radius: 3px;
+
+          /* Misc */
+          opacity: 1;
+      }
+    Positioning 处在第一位，因为他可以使一个元素脱离正常文本流，并且覆盖盒模型相关的样式。
+    盒模型紧跟其后，因为他决定了一个组件的大小和位置。
+    其他属性只在组件 内部 起作用或者不会对前面两种情况的结果产生影响，所以他们排在后面。
+
+  ```
+ 关于完整的属性以及他们的顺序，请参考 [Recess](http://twitter.github.io/recess/)
+
+ * 减少选择器的长度，每个组合选择器选择器的条目应该尽量控制在 3 个以内
+
+  ```
+    .main .content .content-item{
+      ……
+    }
+  ```
 
 #### 4、JAVASCRIPT
+* 空行的使用
+
+  ```
+    1、方法之间添加：
+      <!-- 注释信息 -->
+      funciton fun1(){
+        ……
+      }
+
+      <!-- 注释信息 -->
+      funciton fun2(){
+        ……
+      }
+
+    2、单行或多行注释前添加
+      function fun1(){
+        var _self = this;
+
+        <!-- 注释信息 -->
+        ……
+      }
+
+    3、逻辑块之间添加空行增加可读性
+      function fun1(){
+        var _self = this;
+
+        for(var i = 0, len = arr.length; i < len; i++){
+          ……（这是一块单独的逻辑处理）
+        }
+      }
+  ```
 * 类命名：首字母大写，驼峰命名，eg： TabPanel
 * 函数命名：首字母小写，驼峰命名，eg：getValue()
-* 变量命名：首字母小写，驼峰命名，eg：myCount
+* 变量命名：首字母小写，驼峰命名，带有常用名词全部大写
+
+  ```
+    var myHomeAddress;
+    var phtoneID;
+    var imageURL;
+  ```
+* 变量声明必须使用var，避免全局变量的使用，如window.name = '' 或者 name = ''
 * jQuery变量要求首字符为 $， 私有变量:首字符为_， 常量：全大写
 
   ```
@@ -143,7 +264,6 @@ tab键统一为 <strong>4个空格</strong> 代替
     }
   ```
 * JS尽量使用oop思想做到组件化，每一个组件是一个单独的文件（或文件夹）
-* 变量声明必须使用var，避免全局变量的使用，如window.name = '' 或者 name = ''
 * 所有的前端异常，需要做到单一性处理，不能一个try catch里面包含多个可能性
 * 良好的注释信息：每个方法定义前需要注明方法作用，参数说明
 
@@ -189,3 +309,5 @@ tab键统一为 <strong>4个空格</strong> 代替
   * 建议用sublime（不做强制，sublime的插件机制实在太赞了）
   * HTTP抓包及Post/Get模拟：[Charles](http://www.charlesproxy.com/)
   * markdown 语法使用 [mou](http://25.io/mou/)
+
+### 参考文章
