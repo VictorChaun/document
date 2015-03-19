@@ -1,9 +1,9 @@
 # 前端构想 V0.1
 
-* [Web](https://github.com/putchen/readme/blob/master/web/web.jpg)
+* [Web](https://github.com/itianpin/document/blob/master/%E5%89%8D%E7%AB%AF%E8%A7%84%E8%8C%83/web/web.jpg)
 
-* [WebServer](https://github.com/putchen/readme/blob/master/web/webServer.jpg)
+* [WebServer](https://github.com/itianpin/document/blob/master/%E5%89%8D%E7%AB%AF%E8%A7%84%E8%8C%83/web/webServer.jpg)
 
-* [web](https://github.com/putchen/readme/blob/master/web/webUI.jpg)
+* [webUI](https://github.com/itianpin/document/blob/master/%E5%89%8D%E7%AB%AF%E8%A7%84%E8%8C%83/webUI.jpg)
 
-* [web](https://github.com/putchen/readme/blob/master/web/com.jpg)
+* [com](https://github.com/itianpin/document/blob/master/%E5%89%8D%E7%AB%AF%E8%A7%84%E8%8C%83/web/com.jpg)
