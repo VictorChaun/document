@@ -6,4 +6,4 @@
 
 * [webUI](https://github.com/itianpin/document/blob/master/%E5%89%8D%E7%AB%AF%E8%A7%84%E8%8C%83/web/webUI.jpg)
 
-* [com](https://github.com/itianpin/document/blob/master/%E5%89%8D%E7%AB%AF%E8%A7%84%E8%8C%83/web/web/com.jpg)
+* [com](https://github.com/itianpin/document/blob/master/%E5%89%8D%E7%AB%AF%E8%A7%84%E8%8C%83/web/com.jpg)
